@@ -1,2 +1,2 @@
 # Examensarbete
-Graduation project.
+Graduation project at University of Skövde.
