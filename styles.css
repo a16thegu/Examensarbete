@@ -8,7 +8,14 @@ span {
     padding-right: 20px;
 }
 
-#button {
+#submit {
     width: 60px;
     height: 30px;
+}
+
+.card {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    border: 2px solid blue;
 }

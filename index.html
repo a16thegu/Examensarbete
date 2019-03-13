@@ -4,35 +4,36 @@
             <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="script.js"></script>
+        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <div id="settings">
-            <form onSubmit="printGame(document.getElementsByName('cards'),document.getElementsByName('category'),document.getElementsByName('library'))">
+            <h1>Game Settings</h1>
+            <form>
                 <span>
-                    Game Plan: 
-                    <select name="cards">
-                        <option value="2x3">2x3</option>
-                        <option value="3x4">3x4</option>
-                        <option value="4x5">4x5</option>
+                    Cards: 
+                    <select id="cards" name="cards">
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="16">16</option>
                     </select>
                 </span>
                 <span>
-                    Study Category: 
-                    <select name="category">
+                    Category: 
+                    <select id="category" name="category">
                         <option value="Animals">Animals</option>
                         <option value="Halloween">Halloween</option>
                     </select>
                 </span>
                 <span>
                     JS Library: 
-                    <select id="library">
+                    <select id="library" name="library">
                         <option value="jQuery">jQuery</option>
                         <option value="AnimeJS">AnimeJS</option>
                         <option value="AniJs">AniJs</option>
                     </select>
                 </span>
-                <input id="button" type="submit" value="Play">
+                <button id="submit" onclick="startGame()">Play</button>
             </form>
         </div>
         <div id="game"></div>
