@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+            <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
         <div id="settings">
-            <form>
+            <form onSubmit="printGame(document.getElementsByName('cards'),document.getElementsByName('category'),document.getElementsByName('library'))">
                 <span>
                     Game Plan: 
-                    <select id="cards" name="cards">
+                    <select name="cards">
                         <option value="2x3">2x3</option>
                         <option value="3x4">3x4</option>
                         <option value="4x5">4x5</option>
@@ -18,20 +19,20 @@
                 </span>
                 <span>
                     Study Category: 
-                    <select id="category" name="category">
+                    <select name="category">
                         <option value="Animals">Animals</option>
                         <option value="Halloween">Halloween</option>
                     </select>
                 </span>
                 <span>
                     JS Library: 
-                    <select id="library" name="library">
+                    <select id="library">
                         <option value="jQuery">jQuery</option>
                         <option value="AnimeJS">AnimeJS</option>
                         <option value="AniJs">AniJs</option>
                     </select>
                 </span>
-                <input type="submit" value="Play">
+                <input id="button" type="submit" value="Play">
             </form>
         </div>
         <div id="game"></div>
