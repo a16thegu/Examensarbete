@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
-        <div id="gameSettings">
-            <select name="objects">
-                <option value="2x3">2x3</option>
-                <option value="3x4">3x4</option>
-                <option value="4x5">4x5</option>
-            </select>
+        <div id="settings">
+            <form>
+                <span>
+                    Game Plan: 
+                    <select id="cards" name="cards">
+                        <option value="2x3">2x3</option>
+                        <option value="3x4">3x4</option>
+                        <option value="4x5">4x5</option>
+                    </select>
+                </span>
+                <span>
+                    Study Category: 
+                    <select id="category" name="category">
+                        <option value="Animals">Animals</option>
+                        <option value="Halloween">Halloween</option>
+                    </select>
+                </span>
+                <span>
+                    JS Library: 
+                    <select id="library" name="library">
+                        <option value="jQuery">jQuery</option>
+                        <option value="AnimeJS">AnimeJS</option>
+                        <option value="AniJs">AniJs</option>
+                    </select>
+                </span>
+                <input type="submit" value="Play">
+            </form>
         </div>
-        <div id="gameSpace"></div>
+        <div id="game"></div>
     </body>
 </html>
