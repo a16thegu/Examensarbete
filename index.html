@@ -33,7 +33,8 @@
                         <option value="AniJs">AniJs</option>
                     </select>
                 </span>
-                <button id="submit" onclick="startGame()">Play</button>
+                <button class="submit" onclick="startGame(); return false;">Play</button>
+                <button class="submit" onclick="removeCards(); return false;">Reset</button>
             </form>
         </div>
         <div id="game"></div>

@@ -3,6 +3,8 @@ function startGame() {
     var category = document.getElementById("category");
     var library = document.getElementById("library");
     
+    removeCards();
+
     if (library.value == "jQuery"){
         printCardsJQUERY(cards.value, category.value);
     } 
@@ -22,6 +24,8 @@ function printCardsJQUERY(cards, category) {
         div.className = "card";
         document.getElementById("game").appendChild(div);
     }
+
+    //Animate objekts with jQuery here
 }
 
 function printCardsANIMEJS(cards, category) {
@@ -30,4 +34,12 @@ function printCardsANIMEJS(cards, category) {
 
 function printCardsANIJS(cards, category) {
     alert("Values: " + cards + " " + category);
+}
+
+
+function removeCards(){
+    var game = document.getElementById("game");
+    while(game.firstChild){
+        game.removeChild(game.firstChild);
+    }
 }
