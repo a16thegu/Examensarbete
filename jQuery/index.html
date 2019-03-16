@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <meta charset="UTF-8">
+        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="script.js"></script>
@@ -15,7 +15,7 @@
                     <select id="cards" name="cards">
                         <option value="4">4</option>
                         <option value="8">8</option>
-                        <option value="16">16</option>
+                        <option value="12">12</option>
                     </select>
                 </span>
                 <span>
@@ -25,18 +25,10 @@
                         <option value="Halloween">Halloween</option>
                     </select>
                 </span>
-                <span>
-                    JS Library: 
-                    <select id="library" name="library">
-                        <option value="jQuery">jQuery</option>
-                        <option value="AnimeJS">AnimeJS</option>
-                        <option value="AniJs">AniJs</option>
-                    </select>
-                </span>
-                <button class="submit" onclick="startGame(); return false;">Play</button>
-                <button class="submit" onclick="removeCards(); return false;">Reset</button>
+                <button id="play" class="submit" onclick="startGame(); return false;">Play</button>
+                <button id="reset" class="submit" onclick="removeCards(); return false;">Reset</button>
             </form>
         </div>
-        <div id="game"></div>
+        <div id="board"></div>
     </body>
 </html>
