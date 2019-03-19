@@ -1,0 +1,27 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 400px auto;
+    padding: 10px;
+}
+
+.grid-item {
+    padding: 20px;
+    margin: 10px;
+}
+
+#map {
+    border: 1px solid black;
+    display: inline-block;
+    position: relative;
+}
+
+#content{
+    border: 1px solid black;
+    display: inline-block;
+    position: relative;
+    height: 800px;
+}
+
+#SE-BD:hover {
+    fill: aqua;
+}
