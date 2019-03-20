@@ -26,3 +26,8 @@
     position: relative;
     height: 800px;
 }
+
+svg path {
+    stroke:white;
+    stroke-width: 0.6;
+}

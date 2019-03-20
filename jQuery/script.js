@@ -16,20 +16,17 @@ function start(e){
 
     var previous = localStorage.getItem("County");
 
-    /*$("#content").slideUp(function(){
-        for(var i = 0; i < countys.length; i++){
-            if (countys[i][0] == county){
-                headline.innerHTML = countys[i][1];
-                text.innerHTML = "";
-                image.innerHTML = "";
-            }
-        }
-    });
-    $("#content").slideDown(1500);*/
+    if (county == "Home"){
+        document.getElementById(county).style.fill = "black";
+        document.getElementById(previous).style.fill = "black";
+    } 
+    else {
+        document.getElementById(county).style.fill = "#c50101";
+        document.getElementById(previous).style.fill = "black";
+    };
 
     $("#content").animate({
-        height: "0px",
-        width: "0px"
+        top: "-900px"
     }, "slow", function(){
         for(var i = 0; i < countys.length; i++){
             if (countys[i][0] == county){
@@ -39,22 +36,15 @@ function start(e){
             }
         };
 
-        if (county == "Home"){
-            document.getElementById(county).style.fill = "black";
-            document.getElementById(previous).style.fill = "black";
-        } 
-        else {
-            document.getElementById(previous).style.fill = "black";
-            document.getElementById(county).style.fill = "#c50101";
-        };
+        $("#content").animate({
+            top: "0px"
+        }, "slow");
     });
-    $("#content").animate({
-        height: "800px",
-        width: "700px"
-    }, "slow");
+    
 
     localStorage.setItem("County", county);
 }
+
 
 var countys = [
     ["Home", "Welcome to the interactive Sweden map!", "This is a graduation projekt at University of Skövde.", ""],
