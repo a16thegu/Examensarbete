@@ -1,28 +1,28 @@
 .grid-container {
     display: grid;
-    grid-template-columns: 400px auto;
+    grid-template-columns: 410px 700px;
+    grid-template-rows: auto auto;
     padding: 10px;
 }
 
 .grid-item {
-    padding: 20px;
     margin: 10px;
 }
 
 #map {
-    border: 1px solid black;
-    display: inline-block;
-    position: relative;
-}
-
-#content{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    padding: 20px;
     display: inline-block;
     position: relative;
     height: 800px;
 }
 
-#SE {
-    font-family: Verdana;
-    font-size: 30px;
+#content{
+    /*border: 1px solid black;*/
+    box-shadow: 20px 20px 50px grey;
+    padding: 20px;
+    border-radius:10px;
+    display: inline-block;
+    position: relative;
+    height: 800px;
 }
