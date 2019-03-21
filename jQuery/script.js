@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
 	var svg = document.querySelector("svg");
-	svg.addEventListener("click", start);
+    svg.addEventListener("click", start);
 },false);
 
 
@@ -25,6 +25,8 @@ function start(e){
         document.getElementById(previous).style.fill = "black";
     };
 
+    localStorage.setItem("Start", Date.now());
+
     $("#content").animate({
         top: "-900px"
     }, "slow", function(){
@@ -40,14 +42,14 @@ function start(e){
             top: "0px"
         }, "slow");
     });
-    
 
+    localStorage.setItem("End", Date.now());
     localStorage.setItem("County", county);
 }
 
 
 var countys = [
-    ["Home", "Welcome to the interactive Sweden map!", "This is a graduation projekt at University of Skövde.", ""],
+    ["Home", "Welcome to the interactive Sweden map!", "This is a graduation projekt at University of Skövde.<br>The map is available <a href='https://mapsvg.com/maps/sweden/' target='_blank'>here</a> and home-button <a href='https://commons.wikimedia.org/wiki/File:Ic_home_48px.svg' target='_blank'>here</a>.", ""],
     ["SE-K", "Blekinge", "", ""],
     ["SE-I", "Gotland", "", ""],
     ["SE-X", "Gävleborg", "", ""],
