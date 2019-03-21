@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(){
-	var svg = document.querySelector("svg");
-    svg.addEventListener("click", start);
+    console.log("HejHej");
+    var svg = Array.from(document.querySelectorAll('svg path'));
+
+    svg.forEach(function(path) {
+        path.addEventListener("click", start);
+     })
+
 },false);
 
-
 function start(e){
-    var county = e.explicitOriginalTarget.attributes[2].nodeValue;
+    var county = e.target.id;
     var headline = document.getElementById("headline");
     var text = document.getElementById("text");
     var image = document.getElementById("image");
@@ -40,10 +44,11 @@ function start(e){
 
         $("#content").animate({
             top: "0px"
-        }, "slow");
+        }, "slow", function(){
+            localStorage.setItem("End", Date.now());
+        });
     });
 
-    localStorage.setItem("End", Date.now());
     localStorage.setItem("County", county);
 }
 
