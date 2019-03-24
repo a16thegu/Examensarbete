@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(){
-    console.log("HejHej");
     var svg = Array.from(document.querySelectorAll('svg path'));
 
     svg.forEach(function(path) {
