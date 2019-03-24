@@ -28,8 +28,8 @@ function start(e){
         document.getElementById(previous).style.fill = "black";
     };
 
-    localStorage.setItem("Start", Date.now());
-
+    //localStorage.setItem("StartTime", Date.now());
+    console.time("Time");
     $("#content").animate({
         top: "-900px"
     }, "slow", function(){
@@ -44,10 +44,11 @@ function start(e){
         $("#content").animate({
             top: "0px"
         }, "slow", function(){
-            localStorage.setItem("End", Date.now());
+            //localStorage.setItem("EndTime", Date.now());
+            console.timeEnd("Time");
         });
     });
-
+    
     localStorage.setItem("County", county);
 }
 

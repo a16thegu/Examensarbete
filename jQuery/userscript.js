@@ -4,6 +4,7 @@ $(document).ready(function(){
     var data = [];
     var startTime;
     var endTime;
+    var elapsedTime;
     var str = "";
     var dataWindow;
     var event;
@@ -33,18 +34,20 @@ $(document).ready(function(){
     }
 
     loopCount = parseInt(localStorage.LoopCount);
-    loops = 5;
+    loops = 10;
 
     if (localStorage.getItem("RunScript") == "true"){
         event = document.createEvent("SVGEvents");
-        event.initEvent("click",true,true);
+        event.initEvent("click", true, true);
         document.getElementById("SE-U").dispatchEvent(event);
-        
-        $(document).ready(function(){
-            console.log("RunScript: true Loop: " + parseInt(localStorage.LoopCount));    
-        });
 
+        console.log("RunScript: true Loop: " + parseInt(localStorage.LoopCount));
+
+        elapsedTimeTo = parseInt(localStorage.EndTime) - parseInt(localStorage.StartTime);
+        data.push(elapsedTime);
+        
         if (parseInt(localStorage.LoopCount) < loops){
+            localStorage.setItem("Data", JSON.stringify(data));
             localStorage.setItem("LoopCount", parseInt(localStorage.LoopCount) + 1);
             window.location.reload();
         }
@@ -55,5 +58,16 @@ $(document).ready(function(){
     }
     else if (localStorage.getItem("RunScript") == "false"){
         console.log("RunScript: false");
+
+        str += "<table>";
+        for(var i = 0; i < data.length; i += 1){
+            str += "<tr>"
+            str += "<td>" + data[i] + "</td>";
+            str += "</tr>"
+        }
+        str += "</table>";
+
+       dataWindow = window.open("about:blank", "", "_blank");
+       dataWindow.document.write(str);
     }
 });
