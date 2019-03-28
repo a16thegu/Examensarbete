@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var runScript;
     var count;
-    var loops = 10;
+    var loops = 5;
     var data = [];
     var str = "";
     var dataWindow;
@@ -11,14 +11,14 @@ $(document).ready(function(){
     }
 
     if (localStorage.getItem("RunScript") == null){
-        localStorage.setItem("RunScript", "true");
+        runScript = "true";
     }
     else {
         runScript = localStorage.getItem("RunScript");
     }
 
     if (localStorage.getItem("Count") == null){
-        localStorage.setItem("Count", 0);
+        count = 0;
     }
     else {
         count = parseInt(localStorage.getItem("Count"));
@@ -32,17 +32,21 @@ $(document).ready(function(){
         data = (data) ? JSON.parse(data) : [];
     }
 
+    console.log("Run: " + runScript);
+    
     if (runScript == "true"){
+        console.log("Loop: " + count);
+
         event = document.createEvent("SVGEvents");
         event.initEvent("click", true, true);
         document.getElementById("SE-U").dispatchEvent(event);
-
-        sleep(10000).then(() => {
-            data.push(localStorage.getItem("ElapsedTime"));
-
+        
+        sleep(5000).then(() => {
             if (count < loops){
+                data.push(localStorage.getItem("ElapsedTime"));
+                localStorage.setItem("RunScript", "true");
                 localStorage.setItem("Data", JSON.stringify(data));
-                localStorage.setItem("Count", parseInt(localStorage.Count) + 1);
+                localStorage.setItem("Count", count + 1);
                 window.location.reload();
             }
             else {
@@ -51,8 +55,8 @@ $(document).ready(function(){
             }
         });
     }
-    else if (localStorage.getItem("RunScript") == "false"){
-        console.log("RunScript: false");
+    else if (runScript == "false"){
+        console.log("Data: " + JSON.stringify(data));
 
         str += "<table>";
         for(var i = 0; i < data.length; i += 1){
