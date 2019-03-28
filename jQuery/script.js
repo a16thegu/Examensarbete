@@ -28,8 +28,8 @@ function start(e){
         document.getElementById(previous).style.fill = "black";
     };
 
-    //localStorage.setItem("StartTime", Date.now());
-    console.time("Time");
+    var t0 = performance.now();
+
     $("#content").animate({
         top: "-900px"
     }, "slow", function(){
@@ -44,8 +44,11 @@ function start(e){
         $("#content").animate({
             top: "0px"
         }, "slow", function(){
-            //localStorage.setItem("EndTime", Date.now());
-            console.timeEnd("Time");
+            var t1 = performance.now();
+            var elapsedTime = t1 - t0;
+
+            localStorage.setItem("ElapsedTime", elapsedTime);
+            console.log("Time: " + elapsedTime + " ms");
         });
     });
     

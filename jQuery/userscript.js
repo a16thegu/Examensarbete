@@ -1,20 +1,27 @@
 $(document).ready(function(){
-    var loopCount;
-    var loops;
+    var runScript;
+    var count;
+    var loops = 10;
     var data = [];
-    var startTime;
-    var endTime;
-    var elapsedTime;
     var str = "";
     var dataWindow;
     var event;
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
 
     if (localStorage.getItem("RunScript") == null){
         localStorage.setItem("RunScript", "true");
     }
+    else {
+        runScript = localStorage.getItem("RunScript");
+    }
 
-    if (localStorage.getItem("LoopCount") == null){
-        localStorage.setItem("LoopCount", 0);
+    if (localStorage.getItem("Count") == null){
+        localStorage.setItem("Count", 0);
+    }
+    else {
+        count = parseInt(localStorage.getItem("Count"));
     }
 
     if (localStorage.getItem("Data") === null){
@@ -25,36 +32,24 @@ $(document).ready(function(){
         data = (data) ? JSON.parse(data) : [];
     }
 
-    if (localStorage.getItem("StartTime") === null){
-        localStorage.setItem("StartTime", Date.now());
-    }
-
-    if (localStorage.getItem("EndTime") === null){
-        localStorage.setItem("EndTime", Date.now());
-    }
-
-    loopCount = parseInt(localStorage.LoopCount);
-    loops = 10;
-
-    if (localStorage.getItem("RunScript") == "true"){
+    if (runScript == "true"){
         event = document.createEvent("SVGEvents");
         event.initEvent("click", true, true);
         document.getElementById("SE-U").dispatchEvent(event);
 
-        console.log("RunScript: true Loop: " + parseInt(localStorage.LoopCount));
+        sleep(10000).then(() => {
+            data.push(localStorage.getItem("ElapsedTime"));
 
-        elapsedTimeTo = parseInt(localStorage.EndTime) - parseInt(localStorage.StartTime);
-        data.push(elapsedTime);
-        
-        if (parseInt(localStorage.LoopCount) < loops){
-            localStorage.setItem("Data", JSON.stringify(data));
-            localStorage.setItem("LoopCount", parseInt(localStorage.LoopCount) + 1);
-            window.location.reload();
-        }
-        else {
-            localStorage.setItem("RunScript", "false");
-            window.location.reload();
-        }
+            if (count < loops){
+                localStorage.setItem("Data", JSON.stringify(data));
+                localStorage.setItem("Count", parseInt(localStorage.Count) + 1);
+                window.location.reload();
+            }
+            else {
+                localStorage.setItem("RunScript", "false");
+                window.location.reload();
+            }
+        });
     }
     else if (localStorage.getItem("RunScript") == "false"){
         console.log("RunScript: false");
@@ -71,3 +66,4 @@ $(document).ready(function(){
        dataWindow.document.write(str);
     }
 });
+  
