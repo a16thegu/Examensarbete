@@ -7,7 +7,7 @@
       <script type="text/javascript" src="script.js"></script>
       <script type="text/javascript" src="userscript.js"></script>
    </head>
-   <body>
+   <body onload="homePage(); return false;">
       <div id="app" class="grid-container">
          <div id="map" class="grid-item">
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -114,9 +114,10 @@
             </svg>           
          </div>
          <div id="content" class="grid-item">
-            <h1 id="headline">Welcome to the interactive Sweden map!</h1>
-            <p id="text">This is a graduation projekt at University of Skövde.<br>The map is available <a href="https://mapsvg.com/maps/sweden/" target="_blank">here</a> and home-button <a href="https://commons.wikimedia.org/wiki/File:Ic_home_48px.svg" target="_blank">here</a>.</p>
-            <img id="image" alt="" src="">
+            <h1 id="headline"></h1>
+            <p id="text"></p>
+            <img id="img" src="" alt="">
+            <p id="imgText"></p>
          </div>
       </div>
    </body>
