@@ -211,29 +211,13 @@ function start(e){
 
     tStart = performance.now();
 
-    $("#content").animate({
-        top: "-900px"
-    }, "slow", function(){
-        for(var i = 0; i < countys.length; i++){
-            if (countys[i][0] == county){
-                headline.innerHTML = countys[i][1];
-                text.innerHTML = countys[i][2];
-                img.src = countys[i][3];
-                img.alt = countys[i][4];
-                imgText.innerHTML = countys[i][5];
-            }
-        };
+    // Insert AniJS animation code here.
 
-        $("#content").animate({
-            top: "0px"
-        }, "slow", function(){
-            tEnd = performance.now();
-            elapsedTime = tEnd - tStart;
+    tEnd = performance.now();
+    elapsedTime = tEnd - tStart;
 
-            localStorage.setItem("ElapsedTime", elapsedTime);
-            console.log("Time: " + elapsedTime + " ms");
-        });
-    });
+    localStorage.setItem("ElapsedTime", elapsedTime);
+    console.log("Time: " + elapsedTime + " ms");
     
     localStorage.setItem("County", county);
 };
