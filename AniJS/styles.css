@@ -1,3 +1,5 @@
+/* Styles used to display the effects on the application.*/
+
 .grid-container {
     display: grid;
     grid-template-columns: 410px 700px;

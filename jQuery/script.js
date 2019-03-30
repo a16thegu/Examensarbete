@@ -1,3 +1,7 @@
+/* Declared vaiables used in the script and the information variabel 
+ * 'county' containing all the information of the Sweden countys and home page;
+ * order: ID, Headline, Text, Image src, Image alt, Credits
+ */
 var svg;
 var county;
 var headline;
@@ -166,10 +170,12 @@ var countys = [
     ]
 ];
 
+// LocalStorage is used to keep track on which county the user have been on.
 if(localStorage.getItem("County") === null){
     localStorage.setItem("County", "Home")
 };
 
+// Writes out the homepage information at start up of the application.
 function homePage(){
     headline = document.getElementById("headline");
     text = document.getElementById("text");
@@ -183,37 +189,52 @@ function homePage(){
     imgText.innerHTML = countys[0][5];
 }
 
+/* When all HTML-elements is loaded to the DOM, the script saves all 
+ * the path-elements form the SVG map to an array and gets a event listner 
+ * added, which is connected to the function runAnimation() if one path-element 
+ * is clicked on. */
 document.addEventListener("DOMContentLoaded", function(){
     svg = Array.from(document.querySelectorAll('svg path'));
 
     svg.forEach(function(path) {
-        path.addEventListener("click", start);
+        path.addEventListener("click", runAnimation);
      });
 
 },false);
 
-function start(e){
-    county = e.target.id;
+/* Activates when a click-event is triggerd, which takes in the object 
+ * the user has clicked on and uses it to know which information
+ * the information windows should show.
+ */
+function runAnimation(click){
+    county = click.target.id;
     headline = document.getElementById("headline");
     text = document.getElementById("text");
     img = document.getElementById("img");
     imgText = document.getElementById("imgText");
     previous = localStorage.getItem("County");
 
+    /* Colors the chosen county to red and 
+     * color county back to black if home-button is chosen.*/
     if (county == "Home"){
-        document.getElementById(county).style.fill = "black";
         document.getElementById(previous).style.fill = "black";
+        document.getElementById(county).style.fill = "black";
     } 
     else {
-        document.getElementById(county).style.fill = "#c50101";
         document.getElementById(previous).style.fill = "black";
+        document.getElementById(county).style.fill = "#c50101";
     };
 
+    // Start clock for the measurement script.
     tStart = performance.now();
 
+    /* jQuery animation starts here and begins to slide the 
+     * information window to the top and out of sight for the user. */
     $("#content").animate({
         top: "-900px"
     }, "slow", function(){
+
+        // Adds the chosen countys information to the information window.
         for(var i = 0; i < countys.length; i++){
             if (countys[i][0] == county){
                 headline.innerHTML = countys[i][1];
@@ -224,16 +245,21 @@ function start(e){
             }
         };
 
+        // Makes the information window slide down again.
         $("#content").animate({
             top: "0px"
         }, "slow", function(){
+
+            // End clock for the measurement script and calculation of the elapsed time.
             tEnd = performance.now();
             elapsedTime = tEnd - tStart;
 
+            // Measurement value is saved to LocalStorage.
             localStorage.setItem("ElapsedTime", elapsedTime);
             console.log("Time: " + elapsedTime + " ms");
         });
     });
     
+    // The users current location county is saved to LocalStorage.
     localStorage.setItem("County", county);
 };
