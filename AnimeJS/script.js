@@ -230,6 +230,7 @@ function runAnimation(click){
     // Start clock for the measurement script.
     tStart = performance.now();
 
+    /**/
     animation = anime.timeline({
         targets: content,
         duration: 600,
@@ -238,6 +239,8 @@ function runAnimation(click){
         translateY: -900,
     }).add({
         update: function(anim) {
+
+            // Adds the chosen countys information to the information window.
             for(var i = 0; i < countys.length; i++){
                 if (countys[i][0] == county){
                     headline.innerHTML = countys[i][1];
