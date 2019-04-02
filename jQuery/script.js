@@ -232,7 +232,7 @@ function runAnimation(click){
      * information window to the top and out of sight for the user. */
     $("#content").animate({
         top: "-900px"
-    }, "slow", function(){
+    }, 600, function(){
 
         // Adds the chosen countys information to the information window.
         for(var i = 0; i < countys.length; i++){
@@ -248,7 +248,7 @@ function runAnimation(click){
         // Makes the information window slide down again.
         $("#content").animate({
             top: "0px"
-        }, "slow", function(){
+        }, 600, function(){
 
             // End clock for the measurement script and calculation of the elapsed time.
             tEnd = performance.now();

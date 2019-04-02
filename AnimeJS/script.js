@@ -9,6 +9,7 @@ var text;
 var img;
 var imgText;
 var previous;
+var animation;
 var tStart;
 var tEnd;
 var elapsedTime;
@@ -208,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function(){
  */
 function runAnimation(click){
     county = click.target.id;
+    content = document.getElementById("content");
     headline = document.getElementById("headline");
     text = document.getElementById("text");
     img = document.getElementById("img");
@@ -228,15 +230,37 @@ function runAnimation(click){
     // Start clock for the measurement script.
     tStart = performance.now();
 
-    // Insert AnimeJS animation code here.
+    animation = anime.timeline({
+        targets: content,
+        duration: 600,
+        easing: 'linear'
+    }).add({
+        translateY: -900,
+    }).add({
+        update: function(anim) {
+            for(var i = 0; i < countys.length; i++){
+                if (countys[i][0] == county){
+                    headline.innerHTML = countys[i][1];
+                    text.innerHTML = countys[i][2];
+                    img.src = countys[i][3];
+                    img.alt = countys[i][4];
+                    imgText.innerHTML = countys[i][5];
+                }
+            };
+        }
+    }).add({
+        translateY: 0,
+    });
 
-    // End clock for the measurement script and calculation of the elapsed time.
-    tEnd = performance.now();
-    elapsedTime = tEnd - tStart;
+    animation.finished.then(function() {
+        // End clock for the measurement script and calculation of the elapsed time.
+        tEnd = performance.now();
+        elapsedTime = tEnd - tStart;
 
-    // Measurement value is saved to LocalStorage.
-    localStorage.setItem("ElapsedTime", elapsedTime);
-    console.log("Time: " + elapsedTime + " ms");
+        // Measurement value is saved to LocalStorage.
+        localStorage.setItem("ElapsedTime", elapsedTime);
+        console.log("Time: " + elapsedTime + " ms");
+    });
 
     // The users current location county is saved to LocalStorage.
     localStorage.setItem("County", county);
