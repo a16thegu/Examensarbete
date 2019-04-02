@@ -4,6 +4,7 @@
  */
 var svg;
 var county;
+var content;
 var headline;
 var text;
 var img;
@@ -230,7 +231,8 @@ function runAnimation(click){
     // Start clock for the measurement script.
     tStart = performance.now();
 
-    /**/
+    /* AnimeJS animation starts here and begins to slide the 
+     * information window to the top and out of sight for the user.*/
     animation = anime.timeline({
         targets: content,
         duration: 600,
@@ -252,6 +254,7 @@ function runAnimation(click){
             };
         }
     }).add({
+        // Slides the information window back into the user view.
         translateY: 0,
     });
 

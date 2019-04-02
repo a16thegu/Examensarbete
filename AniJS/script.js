@@ -4,6 +4,7 @@
  */
 var svg;
 var county;
+var content;
 var headline;
 var text;
 var img;
@@ -208,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function(){
  */
 function runAnimation(click){
     county = click.target.id;
+    content = document.getElementById("content");
     headline = document.getElementById("headline");
     text = document.getElementById("text");
     img = document.getElementById("img");
@@ -228,7 +230,19 @@ function runAnimation(click){
     // Start clock for the measurement script.
     tStart = performance.now();
 
-    // Insert AniJS animation code here.
+    /**/
+    AniJS.createAnimation([{
+        event: 'click',
+        eventTarget: county,
+        behaviorTarget: content,
+        behavior: 'bounceIn',
+        after: function(){
+            console.log("HeHej");
+            //animationContext.run();
+        },
+        
+
+    }]);
 
     // End clock for the measurement script and calculation of the elapsed time.
     tEnd = performance.now();
