@@ -255,7 +255,7 @@ function runAnimation(click){
             elapsedTime = tEnd - tStart;
 
             // Measurement value is saved to LocalStorage.
-            localStorage.setItem("ElapsedTime", elapsedTime);
+            localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
             console.log("Time: " + elapsedTime + " ms");
         });
     });
