@@ -265,7 +265,7 @@ function runAnimation(click){
 
         // Measurement value is saved to LocalStorage.
         localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
-        console.log("Time: " + elapsedTime + " ms");
+        console.log("Time: " + Math.round(elapsedTime) + " ms");
     });
 
     // The users current location county is saved to LocalStorage.

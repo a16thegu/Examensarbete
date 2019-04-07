@@ -10,6 +10,7 @@ var text;
 var img;
 var imgText;
 var previous;
+var animation;
 var tStart;
 var tEnd;
 var elapsedTime;
@@ -230,19 +231,7 @@ function runAnimation(click){
     // Start clock for the measurement script.
     tStart = performance.now();
 
-    /**/
-    AniJS.createAnimation([{
-        event: 'click',
-        eventTarget: county,
-        behaviorTarget: content,
-        behavior: 'bounceIn',
-        after: function(){
-            console.log("HeHej");
-            //animationContext.run();
-        },
-        
-
-    }]);
+    /* Insert VelocityJS animation code here. */
 
     // End clock for the measurement script and calculation of the elapsed time.
     tEnd = performance.now();
@@ -250,8 +239,8 @@ function runAnimation(click){
 
     // Measurement value is saved to LocalStorage.
     localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
-    console.log("Time: " + elapsedTime + " ms");
-    
+    console.log("Time: " + Math.round(elapsedTime) + " ms");
+
     // The users current location county is saved to LocalStorage.
     localStorage.setItem("County", county);
 };

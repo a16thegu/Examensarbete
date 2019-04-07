@@ -50,7 +50,7 @@ $(document).ready(function(){
          * time to complete, otherwise the script will continue to run 
          * regardless of the sleep-function.
          * */
-        sleep(5000).then(() => {
+        sleep(3000).then(() => {
 
             /* The script only need to run X number of loops.
              * Number of loops is visable in the variable decalration. */
