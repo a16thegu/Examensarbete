@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var runScript;
     var count;
-    var loops = 5;
+    var loops = 2;
     var data = [];
     var str = "";
     var dataWindow;
@@ -77,17 +77,49 @@ $(document).ready(function(){
     else if (runScript == "false"){
         console.log("Data: " + JSON.stringify(data));
 
-        // Write out the data array on a blank window.
-        str += "<table>";
-        for(var i = 0; i < data.length; i += 1){
-            str += "<tr>"
-            str += "<td>" + data[i] + "</td>";
-            str += "</tr>"
-        }
-        str += "</table>";
+        /* Due to different issues in all browser there 
+         * needs to be two ways to save the data from the 
+         * measuremnts. This is a check point to determend 
+         * which browser that is used. */
+        var ua = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i),
+            browser;
 
-       dataWindow = window.open("about:blank", "", "_blank");
-       dataWindow.document.write(str);
+        if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) {
+            browser = "msie";
+        }
+        else {
+            browser = ua[1].toLowerCase();
+        }
+
+        // Saves the data according to the browser that i used. 
+        if (browser == "safari"){
+
+            // Adds the data to a sting and downloads a file with the data.
+            for(var i = 0; i < data.length; i += 1){
+                str += data[i];
+                str += "\n";
+            }
+
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:attachment/text,' + encodeURI(str);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'jQuery_Safari.txt';
+            hiddenElement.click();
+        }
+        else {
+
+            // Write out the data array on a blank window.
+            str += "<table>";
+            for(var i = 0; i < data.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + data[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+        } 
     }
 });
   
