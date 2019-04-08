@@ -233,14 +233,14 @@ function runAnimation(click){
 
     /* AnimeJS animation starts here and begins to slide the 
      * information window to the top and out of sight for the user.*/
-    animation = anime.timeline({
+    anime({
         targets: content,
         duration: 600,
-        easing: 'linear'
-    }).add({
-        translateY: -900,
-    }).add({
-        update: function(anim) {
+        easing: 'linear',
+        top: -900,
+        direction: 'alternate',
+        loop: 1,
+        loopComplete: function(anim) {
 
             // Adds the chosen countys information to the information window.
             for(var i = 0; i < countys.length; i++){
@@ -252,20 +252,17 @@ function runAnimation(click){
                     imgText.innerHTML = countys[i][5];
                 }
             };
+        },
+        complete: function(anim){
+
+            // End clock for the measurement script and calculation of the elapsed time.
+            tEnd = performance.now();
+            elapsedTime = tEnd - tStart;
+
+            // Measurement value is saved to LocalStorage.
+            localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
+            console.log("Time: " + Math.round(elapsedTime) + " ms");
         }
-    }).add({
-        // Slides the information window back into the user view.
-        translateY: 0,
-    });
-
-    animation.finished.then(function() {
-        // End clock for the measurement script and calculation of the elapsed time.
-        tEnd = performance.now();
-        elapsedTime = tEnd - tStart;
-
-        // Measurement value is saved to LocalStorage.
-        localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
-        console.log("Time: " + Math.round(elapsedTime) + " ms");
     });
 
     // The users current location county is saved to LocalStorage.
