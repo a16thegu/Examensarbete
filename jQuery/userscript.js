@@ -91,7 +91,7 @@ $(document).ready(function(){
             browser = ua[1].toLowerCase();
         }
 
-        // Saves the data according to the browser that i used. 
+        // Saves the data according to the browser that is used. 
         if (browser == "safari"){
 
             // Adds the data to a sting and downloads a file with the data.
