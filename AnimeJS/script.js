@@ -228,8 +228,8 @@ function runAnimation(click){
         document.getElementById(county).style.fill = "#c50101";
     };
 
-    // Start clock for the measurement script.
-    tStart = performance.now();
+    // The comming LocalStorage rows with performance.now() are for the measurement script.
+    localStorage.setItem("oneS", performance.now());
 
     /* AnimeJS animation starts here and begins to slide the 
      * information window to the top and out of sight for the user.*/
@@ -238,9 +238,8 @@ function runAnimation(click){
         duration: 600,
         easing: 'linear',
         top: -900,
-        direction: 'alternate',
-        loop: 1,
-        loopComplete: function(anim) {
+        complete: function(anim) {
+            localStorage.setItem("threeE", performance.now());
 
             // Adds the chosen countys information to the information window.
             for(var i = 0; i < countys.length; i++){
@@ -252,18 +251,25 @@ function runAnimation(click){
                     imgText.innerHTML = countys[i][5];
                 }
             };
-        },
-        complete: function(anim){
 
-            // End clock for the measurement script and calculation of the elapsed time.
-            tEnd = performance.now();
-            elapsedTime = tEnd - tStart;
+            localStorage.setItem("twoS", performance.now());
 
-            // Measurement value is saved to LocalStorage.
-            localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
-            console.log("Time: " + Math.round(elapsedTime) + " ms");
+            // Makes the information window slide down again.
+            anime({
+                targets: content,
+                duration: 600,
+                easing: 'linear',
+                top: 0,
+                complete: function(anim){
+                    localStorage.setItem("fourE", performance.now());
+                }
+            });
+
+            localStorage.setItem("twoE", performance.now());            
         }
     });
+
+    localStorage.setItem("oneE", performance.now());
 
     // The users current location county is saved to LocalStorage.
     localStorage.setItem("County", county);

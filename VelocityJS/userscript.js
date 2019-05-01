@@ -3,8 +3,12 @@ $(document).ready(function(){
     var count;
     var loops = 2;
     var data = [];
+    var dataTwo = [];
+    var dataThree = [];
+    var dataFour = [];
     var str = "";
     var dataWindow;
+    var hiddenElement;
     var event;
     const sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -35,6 +39,30 @@ $(document).ready(function(){
         data = (data) ? JSON.parse(data) : [];
     }
 
+    if (localStorage.getItem("DataTwo") === null){
+        localStorage.setItem("DataTwo", JSON.stringify(dataTwo));
+    } 
+    else {
+        dataTwo = localStorage.getItem("DataTwo");
+        dataTwo = (dataTwo) ? JSON.parse(dataTwo) : [];
+    }
+
+    if (localStorage.getItem("DataThree") === null){
+        localStorage.setItem("DataThree", JSON.stringify(dataThree));
+    } 
+    else {
+        dataThree = localStorage.getItem("DataThree");
+        dataThree = (dataThree) ? JSON.parse(dataThree) : [];
+    }
+
+    if (localStorage.getItem("DataFour") === null){
+        localStorage.setItem("DataFour", JSON.stringify(dataFour));
+    } 
+    else {
+        dataFour = localStorage.getItem("DataFour");
+        dataFour = (dataFour) ? JSON.parse(dataFour) : [];
+    }
+
     console.log("Run: " + runScript);
     
     // The if-statment checks if the script should run and what it should do.
@@ -56,13 +84,28 @@ $(document).ready(function(){
              * Number of loops is visable in the variable decalration. */
             if (count < loops){
 
-                /* The values from the animation execution is saved in 
-                 * LocalStorgae from the applications script file (see script.js) 
-                 * and are here added to the data array with all previous animation 
-                 * execution times and is save to LocalStorage.*/
-                data.push(localStorage.getItem("ElapsedTime"));
-                localStorage.setItem("RunScript", "true");
+                /* Start and stop values are fetched from the application (see script.js) 
+                 * and are calculated to a elapsed time. Then saved to a data array for
+                 * each measurement needed.
+                 */
+
+                elapsedTime = parseInt(localStorage.getItem("oneE")) - parseInt(localStorage.getItem("oneS"));
+                data.push(elapsedTime);
+
+                elapsedTime = parseInt(localStorage.getItem("twoE")) - parseInt(localStorage.getItem("twoS"));
+                dataTwo.push(elapsedTime);
+
+                elapsedTime = parseInt(localStorage.getItem("threeE")) - parseInt(localStorage.getItem("oneS"));
+                dataThree.push(elapsedTime);
+
+                elapsedTime = parseInt(localStorage.getItem("fourE")) - parseInt(localStorage.getItem("twoS"));
+                dataFour.push(elapsedTime);
+
                 localStorage.setItem("Data", JSON.stringify(data));
+                localStorage.setItem("DataTwo", JSON.stringify(dataTwo));
+                localStorage.setItem("DataThree", JSON.stringify(dataThree));
+                localStorage.setItem("DataFour", JSON.stringify(dataFour));
+
                 localStorage.setItem("Count", count + 1);
                 window.location.reload();
             }
@@ -75,7 +118,10 @@ $(document).ready(function(){
         });
     }
     else if (runScript == "false"){
-        console.log("Data: " + JSON.stringify(data));
+        console.log("Code 1: " + JSON.stringify(data));
+        console.log("Code 2: " + JSON.stringify(dataTwo));
+        console.log("Ani 1: " + JSON.stringify(dataThree));
+        console.log("Ani 2: " + JSON.stringify(dataFour));
 
         /* Due to different issues in all browser there 
          * needs to be two ways to save the data from the 
@@ -91,28 +137,100 @@ $(document).ready(function(){
             browser = ua[1].toLowerCase();
         }
 
-        // Saves the data according to the browser that i used. 
+        // Saves the data according to the browser that is used. 
         if (browser == "safari"){
 
             // Adds the data to a sting and downloads a file with the data.
+            str += "Code 1";
+
             for(var i = 0; i < data.length; i += 1){
-                str += data[i];
                 str += "\n";
+                str += data[i];
             }
 
-            var hiddenElement = document.createElement('a');
-            hiddenElement.href = 'data:attachment/text,' + encodeURI(str);
-            hiddenElement.target = '_blank';
-            hiddenElement.download = 'jQuery_Safari.txt';
+            str += "\n";
+            str += "Code 2";
+
+            for(var i = 0; i < dataTwo.length; i += 1){
+                str += "\n";
+                str += dataTwo[i];
+            }
+
+            str += "\n";
+            str += "Ani 1";
+
+            for(var i = 0; i < dataThree.length; i += 1){
+                str += "\n";
+                str += dataThree[i];
+            }
+
+            str += "\n";
+            str += "Ani 2";
+
+            for(var i = 0; i < dataFour.length; i += 1){
+                str += "\n";
+                str += dataFour[i];
+            }
+
+            hiddenElement = document.createElement("a");
+            hiddenElement.href = "data:attachment/text," + encodeURI(str);
+            hiddenElement.target = "_blank";
+            hiddenElement.download = "jQuery_Safari.txt";
             hiddenElement.click();
         }
         else {
 
             // Write out the data array on a blank window.
-            str += "<table>";
+            str += "<table><tr><th>Code 1</th></tr>";
             for(var i = 0; i < data.length; i += 1){
                 str += "<tr>";
                 str += "<td>" + data[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            // Write out the data array on a blank window.
+            str += "<table><tr><th>Code 2</th></tr>";
+            for(var i = 0; i < dataTwo.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + dataTwo[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            // Write out the data array on a blank window.
+            str += "<table><tr><th>Ani 1</th></tr>";
+            for(var i = 0; i < dataThree.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + dataThree[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+
+            // Write out the data array on a blank window.
+            str += "<table><tr><th>Ani 2</th></tr>";
+            for(var i = 0; i < dataFour.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + dataFour[i] + "</td>";
                 str += "</tr>";
             }
             str += "</table>";

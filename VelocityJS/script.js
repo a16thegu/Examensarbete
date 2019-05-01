@@ -228,8 +228,8 @@ function runAnimation(click){
         document.getElementById(county).style.fill = "#c50101";
     };
 
-    // Start clock for the measurement script.
-    tStart = performance.now();
+    // The comming LocalStorage rows with performance.now() are for the measurement script.
+    localStorage.setItem("oneS", performance.now());
 
     /* Insert VelocityJS animation code here. */
     content.velocity(
@@ -237,40 +237,42 @@ function runAnimation(click){
             top: -900
         },{
             duration: 600,
-            easing: 'linear'
-        }
-    ).then(function(){
+            easing: 'linear',
+            complete: function(){
+                localStorage.setItem("threeE", performance.now());
 
-        // Adds the chosen countys information to the information window.
-        for(var i = 0; i < countys.length; i++){
-            if (countys[i][0] == county){
-                headline.innerHTML = countys[i][1];
-                text.innerHTML = countys[i][2];
-                img.src = countys[i][3];
-                img.alt = countys[i][4];
-                imgText.innerHTML = countys[i][5];
+                // Adds the chosen countys information to the information window.
+                for(var i = 0; i < countys.length; i++){
+                    if (countys[i][0] == county){
+                        headline.innerHTML = countys[i][1];
+                        text.innerHTML = countys[i][2];
+                        img.src = countys[i][3];
+                        img.alt = countys[i][4];
+                        imgText.innerHTML = countys[i][5];
+                    }
+                };
+
+                localStorage.setItem("twoS", performance.now());
+
+                // Makes the information window slide down again.
+                content.velocity(
+                    {
+                        top: 0
+                    },{
+                        duration: 600,
+                        easing: 'linear',
+                        complete: function(){
+                            localStorage.setItem("fourE", performance.now());
+                        }
+                    }
+                );
+
+                localStorage.setItem("twoE", performance.now());
             }
-        };
+        }    
+    );
 
-        content.velocity(
-            {
-                top: 0
-            },{
-                duration: 600,
-                easing: 'linear',
-                complete: function(){
-
-                    // End clock for the measurement script and calculation of the elapsed time.
-                    tEnd = performance.now();
-                    elapsedTime = tEnd - tStart;
-
-                    // Measurement value is saved to LocalStorage.
-                    localStorage.setItem("ElapsedTime", Math.round(elapsedTime));
-                    console.log("Time: " + Math.round(elapsedTime) + " ms");
-                }
-            }
-        );
-    });
+    localStorage.setItem("oneE", performance.now());
 
     // The users current location county is saved to LocalStorage.
     localStorage.setItem("County", county);
