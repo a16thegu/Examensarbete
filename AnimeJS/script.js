@@ -14,6 +14,9 @@ var animation;
 var tStart;
 var tEnd;
 var elapsedTime;
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 var countys = [
     [
         "Home", 
@@ -229,17 +232,17 @@ function runAnimation(click){
     };
 
     // The comming LocalStorage rows with performance.now() are for the measurement script.
-    localStorage.setItem("oneS", performance.now());
+    localStorage.setItem("s1_150", performance.now());
 
     /* AnimeJS animation starts here and begins to slide the 
      * information window to the top and out of sight for the user.*/
     anime({
         targets: content,
-        duration: 600,
+        duration: 150,
         easing: 'linear',
         top: -900,
         complete: function(anim) {
-            localStorage.setItem("threeE", performance.now());
+            localStorage.setItem("e3_150", performance.now());
 
             // Adds the chosen countys information to the information window.
             for(var i = 0; i < countys.length; i++){
@@ -252,24 +255,114 @@ function runAnimation(click){
                 }
             };
 
-            localStorage.setItem("twoS", performance.now());
+            localStorage.setItem("s2_150", performance.now());
 
             // Makes the information window slide down again.
             anime({
                 targets: content,
-                duration: 600,
+                duration: 150,
                 easing: 'linear',
                 top: 0,
                 complete: function(anim){
-                    localStorage.setItem("fourE", performance.now());
+                    localStorage.setItem("e4_150", performance.now());
                 }
             });
 
-            localStorage.setItem("twoE", performance.now());            
+            localStorage.setItem("e2_150", performance.now());            
         }
     });
 
-    localStorage.setItem("oneE", performance.now());
+    localStorage.setItem("e1_150", performance.now());
+
+    sleep(1000).then(() => {
+        // The comming LocalStorage rows with performance.now() are for the measurement script.
+        localStorage.setItem("s1_400", performance.now());
+
+        /* AnimeJS animation starts here and begins to slide the 
+        * information window to the top and out of sight for the user.*/
+        anime({
+            targets: content,
+            duration: 400,
+            easing: 'linear',
+            top: -900,
+            complete: function(anim) {
+                localStorage.setItem("e3_400", performance.now());
+
+                // Adds the chosen countys information to the information window.
+                for(var i = 0; i < countys.length; i++){
+                    if (countys[i][0] == county){
+                        headline.innerHTML = countys[i][1];
+                        text.innerHTML = countys[i][2];
+                        img.src = countys[i][3];
+                        img.alt = countys[i][4];
+                        imgText.innerHTML = countys[i][5];
+                    }
+                };
+
+                localStorage.setItem("s2_400", performance.now());
+
+                // Makes the information window slide down again.
+                anime({
+                    targets: content,
+                    duration: 400,
+                    easing: 'linear',
+                    top: 0,
+                    complete: function(anim){
+                        localStorage.setItem("e4_400", performance.now());
+                    }
+                });
+
+                localStorage.setItem("e2_400", performance.now());            
+            }
+        });
+
+        localStorage.setItem("e1_400", performance.now());
+    });
+
+    sleep(3000).then(() => {
+        // The comming LocalStorage rows with performance.now() are for the measurement script.
+        localStorage.setItem("s1_1000", performance.now());
+
+        /* AnimeJS animation starts here and begins to slide the 
+        * information window to the top and out of sight for the user.*/
+        anime({
+            targets: content,
+            duration: 1000,
+            easing: 'linear',
+            top: -900,
+            complete: function(anim) {
+                localStorage.setItem("e3_1000", performance.now());
+
+                // Adds the chosen countys information to the information window.
+                for(var i = 0; i < countys.length; i++){
+                    if (countys[i][0] == county){
+                        headline.innerHTML = countys[i][1];
+                        text.innerHTML = countys[i][2];
+                        img.src = countys[i][3];
+                        img.alt = countys[i][4];
+                        imgText.innerHTML = countys[i][5];
+                    }
+                };
+
+                localStorage.setItem("s2_1000", performance.now());
+
+                // Makes the information window slide down again.
+                anime({
+                    targets: content,
+                    duration: 1000,
+                    easing: 'linear',
+                    top: 0,
+                    complete: function(anim){
+                        localStorage.setItem("e4_1000", performance.now());
+                    }
+                });
+
+                localStorage.setItem("e2_1000", performance.now());            
+            }
+        });
+
+        localStorage.setItem("e1_1000", performance.now());
+    });
 
     // The users current location county is saved to LocalStorage.
     localStorage.setItem("County", county);

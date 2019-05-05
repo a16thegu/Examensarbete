@@ -1,11 +1,19 @@
 $(document).ready(function(){
     var runScript;
     var count;
-    var loops = 2;
-    var data = [];
-    var dataTwo = [];
-    var dataThree = [];
-    var dataFour = [];
+    var loops = 100;
+    var d1_150 = [];
+    var d2_150 = [];
+    var d3_150 = [];
+    var d4_150 = [];
+    var d1_400 = [];
+    var d2_400 = [];
+    var d3_400 = [];
+    var d4_400 = [];
+    var d1_1000 = [];
+    var d2_1000 = [];
+    var d3_1000 = [];
+    var d4_1000 = [];
     var str = "";
     var dataWindow;
     var hiddenElement;
@@ -17,7 +25,11 @@ $(document).ready(function(){
     /* LocalStorage is used to save and fetch information to/from 
      * that the script needs when the window reloads and are othewise 
      * lost or overwritten by a declaration of variable.*/
-    if (localStorage.getItem("RunScript") == null){
+    if (localStorage.getItem("Start") == null){
+        localStorage.setItem("Start", Date.now());
+    }
+    
+     if (localStorage.getItem("RunScript") == null){
         runScript = "true";
     }
     else {
@@ -31,36 +43,100 @@ $(document).ready(function(){
         count = parseInt(localStorage.getItem("Count"));
     }
 
-    if (localStorage.getItem("Data") === null){
-        localStorage.setItem("Data", JSON.stringify(data));
+    if (localStorage.getItem("d1_150") === null){
+        localStorage.setItem("d1_150", JSON.stringify(d1_150));
     } 
     else {
-        data = localStorage.getItem("Data");
-        data = (data) ? JSON.parse(data) : [];
+        d1_150 = localStorage.getItem("d1_150");
+        d1_150 = (d1_150) ? JSON.parse(d1_150) : [];
     }
 
-    if (localStorage.getItem("DataTwo") === null){
-        localStorage.setItem("DataTwo", JSON.stringify(dataTwo));
+    if (localStorage.getItem("d2_150") === null){
+        localStorage.setItem("d2_150", JSON.stringify(d2_150));
     } 
     else {
-        dataTwo = localStorage.getItem("DataTwo");
-        dataTwo = (dataTwo) ? JSON.parse(dataTwo) : [];
+        d2_150 = localStorage.getItem("d2_150");
+        d2_150 = (d2_150) ? JSON.parse(d2_150) : [];
     }
 
-    if (localStorage.getItem("DataThree") === null){
-        localStorage.setItem("DataThree", JSON.stringify(dataThree));
+    if (localStorage.getItem("d3_150") === null){
+        localStorage.setItem("d3_150", JSON.stringify(d3_150));
     } 
     else {
-        dataThree = localStorage.getItem("DataThree");
-        dataThree = (dataThree) ? JSON.parse(dataThree) : [];
+        d3_150 = localStorage.getItem("d3_150");
+        d3_150 = (d3_150) ? JSON.parse(d3_150) : [];
     }
 
-    if (localStorage.getItem("DataFour") === null){
-        localStorage.setItem("DataFour", JSON.stringify(dataFour));
+    if (localStorage.getItem("d4_150") === null){
+        localStorage.setItem("d4_150", JSON.stringify(d4_150));
     } 
     else {
-        dataFour = localStorage.getItem("DataFour");
-        dataFour = (dataFour) ? JSON.parse(dataFour) : [];
+        d4_150 = localStorage.getItem("d4_150");
+        d4_150 = (d4_150) ? JSON.parse(d4_150) : [];
+    }
+
+    if (localStorage.getItem("d1_400") === null){
+        localStorage.setItem("d1_400", JSON.stringify(d1_400));
+    } 
+    else {
+        d1_400 = localStorage.getItem("d1_400");
+        d1_400 = (d1_400) ? JSON.parse(d1_400) : [];
+    }
+
+    if (localStorage.getItem("d2_400") === null){
+        localStorage.setItem("d2_400", JSON.stringify(d2_400));
+    } 
+    else {
+        d2_400 = localStorage.getItem("d2_400");
+        d2_400 = (d2_400) ? JSON.parse(d2_400) : [];
+    }
+
+    if (localStorage.getItem("d3_400") === null){
+        localStorage.setItem("d3_400", JSON.stringify(d3_400));
+    } 
+    else {
+        d3_400 = localStorage.getItem("d3_400");
+        d3_400 = (d3_400) ? JSON.parse(d3_400) : [];
+    }
+
+    if (localStorage.getItem("d4_400") === null){
+        localStorage.setItem("d4_400", JSON.stringify(d4_400));
+    } 
+    else {
+        d4_400 = localStorage.getItem("d4_400");
+        d4_400 = (d4_400) ? JSON.parse(d4_400) : [];
+    }
+
+    if (localStorage.getItem("d1_1000") === null){
+        localStorage.setItem("d1_1000", JSON.stringify(d1_1000));
+    } 
+    else {
+        d1_1000 = localStorage.getItem("d1_1000");
+        d1_1000 = (d1_1000) ? JSON.parse(d1_1000) : [];
+    }
+
+    if (localStorage.getItem("d2_1000") === null){
+        localStorage.setItem("d2_1000", JSON.stringify(d2_1000));
+    } 
+    else {
+        d2_1000 = localStorage.getItem("d2_1000");
+        d2_1000 = (d2_1000) ? JSON.parse(d2_1000) : [];
+    }
+
+    if (localStorage.getItem("d3_1000") === null){
+        localStorage.setItem("d3_1000", JSON.stringify(d3_1000));
+    } 
+    else {
+        d3_1000 = localStorage.getItem("d3_1000");
+        d3_1000 = (d3_1000) ? JSON.parse(d3_1000) : [];
+    }
+
+    if (localStorage.getItem("d4_1000") === null){
+        localStorage.setItem("d4_1000", JSON.stringify(d4_1000));
+    } 
+    else {
+        d4_1000 = localStorage.getItem("d4_1000");
+        d4_1000 = (d4_1000) ? JSON.parse(d4_1000) : [];
     }
 
     console.log("Run: " + runScript);
@@ -78,38 +154,77 @@ $(document).ready(function(){
          * time to complete, otherwise the script will continue to run 
          * regardless of the sleep-function.
          * */
-        sleep(3000).then(() => {
+        sleep(6000).then(() => {
 
             /* The script only need to run X number of loops.
              * Number of loops is visable in the variable decalration. */
             if (count < loops){
 
                 /* Start and stop values are fetched from the application (see script.js) 
-                 * and are calculated to a elapsed time. Then saved to a data array for
+                 * and are calculated to a elapsed time. Then saved to a d1_150 array for
                  * each measurement needed.
                  */
 
-                elapsedTime = parseInt(localStorage.getItem("oneE")) - parseInt(localStorage.getItem("oneS"));
-                data.push(elapsedTime);
+                elapsedTime = parseInt(localStorage.getItem("e1_150")) - parseInt(localStorage.getItem("s1_150"));
+                d1_150.push(Math.round(elapsedTime));
 
-                elapsedTime = parseInt(localStorage.getItem("twoE")) - parseInt(localStorage.getItem("twoS"));
-                dataTwo.push(elapsedTime);
+                elapsedTime = parseInt(localStorage.getItem("e2_150")) - parseInt(localStorage.getItem("s2_150"));
+                d2_150.push(Math.round(elapsedTime));
 
-                elapsedTime = parseInt(localStorage.getItem("threeE")) - parseInt(localStorage.getItem("oneS"));
-                dataThree.push(elapsedTime);
+                elapsedTime = parseInt(localStorage.getItem("e3_150")) - parseInt(localStorage.getItem("s1_150"));
+                d3_150.push(Math.round(elapsedTime));
 
-                elapsedTime = parseInt(localStorage.getItem("fourE")) - parseInt(localStorage.getItem("twoS"));
-                dataFour.push(elapsedTime);
+                elapsedTime = parseInt(localStorage.getItem("e4_150")) - parseInt(localStorage.getItem("s2_150"));
+                d4_150.push(Math.round(elapsedTime));
 
-                localStorage.setItem("Data", JSON.stringify(data));
-                localStorage.setItem("DataTwo", JSON.stringify(dataTwo));
-                localStorage.setItem("DataThree", JSON.stringify(dataThree));
-                localStorage.setItem("DataFour", JSON.stringify(dataFour));
+                localStorage.setItem("d1_150", JSON.stringify(d1_150));
+                localStorage.setItem("d2_150", JSON.stringify(d2_150));
+                localStorage.setItem("d3_150", JSON.stringify(d3_150));
+                localStorage.setItem("d4_150", JSON.stringify(d4_150));
 
+
+                elapsedTime = parseInt(localStorage.getItem("e1_400")) - parseInt(localStorage.getItem("s1_400"));
+                d1_400.push(Math.round(elapsedTime));
+
+                elapsedTime = parseInt(localStorage.getItem("e2_400")) - parseInt(localStorage.getItem("s2_400"));
+                d2_400.push(Math.round(elapsedTime));
+
+                elapsedTime = parseInt(localStorage.getItem("e3_400")) - parseInt(localStorage.getItem("s1_400"));
+                d3_400.push(Math.round(elapsedTime));
+
+                elapsedTime = parseInt(localStorage.getItem("e4_400")) - parseInt(localStorage.getItem("s2_400"));
+                d4_400.push(Math.round(elapsedTime));
+
+                localStorage.setItem("d1_400", JSON.stringify(d1_400));
+                localStorage.setItem("d2_400", JSON.stringify(d2_400));
+                localStorage.setItem("d3_400", JSON.stringify(d3_400));
+                localStorage.setItem("d4_400", JSON.stringify(d4_400));
+
+
+                elapsedTime = parseInt(localStorage.getItem("e1_1000")) - parseInt(localStorage.getItem("s1_1000"));
+                d1_1000.push(Math.round(elapsedTime));
+
+                elapsedTime = parseInt(localStorage.getItem("e2_1000")) - parseInt(localStorage.getItem("s2_1000"));
+                d2_1000.push(Math.round(elapsedTime));
+
+                elapsedTime = parseInt(localStorage.getItem("e3_1000")) - parseInt(localStorage.getItem("s1_1000"));
+                d3_1000.push(Math.round(elapsedTime));
+
+                elapsedTime = parseInt(localStorage.getItem("e4_1000")) - parseInt(localStorage.getItem("s2_1000"));
+                d4_1000.push(Math.round(elapsedTime));
+
+                localStorage.setItem("d1_1000", JSON.stringify(d1_1000));
+                localStorage.setItem("d2_1000", JSON.stringify(d2_1000));
+                localStorage.setItem("d3_1000", JSON.stringify(d3_1000));
+                localStorage.setItem("d4_1000", JSON.stringify(d4_1000));
+
+
+                // Increse to the next click and reloads the site.
                 localStorage.setItem("Count", count + 1);
                 window.location.reload();
             }
             else {
+                localStorage.setItem("End", Date.now());
 
                 // Makes the script stop at the next reload of the page.
                 localStorage.setItem("RunScript", "false");
@@ -118,13 +233,27 @@ $(document).ready(function(){
         });
     }
     else if (runScript == "false"){
-        console.log("Code 1: " + JSON.stringify(data));
-        console.log("Code 2: " + JSON.stringify(dataTwo));
-        console.log("Ani 1: " + JSON.stringify(dataThree));
-        console.log("Ani 2: " + JSON.stringify(dataFour));
+        console.log(parseInt(localStorage.getItem("End")) - parseInt(localStorage.getItem("Start")));
+
+        console.log("D1 150: " + JSON.stringify(d1_150));
+        console.log("D2 150: " + JSON.stringify(d2_150));
+        console.log("D3 150: " + JSON.stringify(d3_150));
+        console.log("D4 150: " + JSON.stringify(d4_150));
+
+        console.log("D1 400: " + JSON.stringify(d1_400));
+        console.log("D2 400: " + JSON.stringify(d2_400));
+        console.log("D3 400: " + JSON.stringify(d3_400));
+        console.log("D4 400: " + JSON.stringify(d4_400));
+
+        console.log("D1 1000: " + JSON.stringify(d1_1000));
+        console.log("D2 1000: " + JSON.stringify(d2_1000));
+        console.log("D3 1000: " + JSON.stringify(d3_1000));
+        console.log("D4 1000: " + JSON.stringify(d4_1000));
+
+        
 
         /* Due to different issues in all browser there 
-         * needs to be two ways to save the data from the 
+         * needs to be two ways to save the d1_150 from the 
          * measuremnts. This is a check point to determend 
          * which browser that is used. */
         var ua = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i),
@@ -140,36 +269,100 @@ $(document).ready(function(){
         // Saves the data according to the browser that is used. 
         if (browser == "safari"){
 
-            // Adds the data to a sting and downloads a file with the data.
-            str += "Code 1";
+            // Adds the data to a sting and download it as a file.
+            str += "D1 150";
 
-            for(var i = 0; i < data.length; i += 1){
+            for(var i = 0; i < d1_150.length; i += 1){
                 str += "\n";
-                str += data[i];
+                str += d1_150[i];
             }
 
-            str += "\n";
-            str += "Code 2";
+            str += "\n\n\n";
+            str += "D2 150";
 
-            for(var i = 0; i < dataTwo.length; i += 1){
+            for(var i = 0; i < d2_150.length; i += 1){
                 str += "\n";
-                str += dataTwo[i];
+                str += d2_150[i];
             }
 
-            str += "\n";
-            str += "Ani 1";
+            str += "\n\n\n";
+            str += "D3 150";
 
-            for(var i = 0; i < dataThree.length; i += 1){
+            for(var i = 0; i < d3_150.length; i += 1){
                 str += "\n";
-                str += dataThree[i];
+                str += d3_150[i];
             }
 
-            str += "\n";
-            str += "Ani 2";
+            str += "\n\n\n";
+            str += "D4 150";
 
-            for(var i = 0; i < dataFour.length; i += 1){
+            for(var i = 0; i < d4_150.length; i += 1){
                 str += "\n";
-                str += dataFour[i];
+                str += d4_150[i];
+            }
+
+            str += "\n\n\n";
+            str += "D1 400";
+
+            for(var i = 0; i < d1_400.length; i += 1){
+                str += "\n";
+                str += d1_400[i];
+            }
+
+            str += "\n\n\n";
+            str += "D2 400";
+
+            for(var i = 0; i < d2_400.length; i += 1){
+                str += "\n";
+                str += d2_400[i];
+            }
+
+            str += "\n\n\n";
+            str += "D3 400";
+
+            for(var i = 0; i < d3_400.length; i += 1){
+                str += "\n";
+                str += d3_400[i];
+            }
+
+            str += "\n\n\n";
+            str += "D4 400";
+
+            for(var i = 0; i < d4_400.length; i += 1){
+                str += "\n";
+                str += d4_400[i];
+            }
+
+            str += "\n\n\n";
+            str += "D1 1000";
+
+            for(var i = 0; i < d1_1000.length; i += 1){
+                str += "\n";
+                str += d1_1000[i];
+            }
+
+            str += "\n\n\n";
+            str += "D2 1000";
+
+            for(var i = 0; i < d2_1000.length; i += 1){
+                str += "\n";
+                str += d2_1000[i];
+            }
+
+            str += "\n\n\n";
+            str += "D3 1000";
+
+            for(var i = 0; i < d3_1000.length; i += 1){
+                str += "\n";
+                str += d3_1000[i];
+            }
+
+            str += "\n\n\n";
+            str += "D4 1000";
+
+            for(var i = 0; i < d4_1000.length; i += 1){
+                str += "\n";
+                str += d4_1000[i];
             }
 
             hiddenElement = document.createElement("a");
@@ -180,11 +373,11 @@ $(document).ready(function(){
         }
         else {
 
-            // Write out the data array on a blank window.
-            str += "<table><tr><th>Code 1</th></tr>";
-            for(var i = 0; i < data.length; i += 1){
+            // Write out all data array on a blank seperat windows.
+            str += "<table><tr><th>D1 150</th></tr>";
+            for(var i = 0; i < d1_150.length; i += 1){
                 str += "<tr>";
-                str += "<td>" + data[i] + "</td>";
+                str += "<td>" + d1_150[i] + "</td>";
                 str += "</tr>";
             }
             str += "</table>";
@@ -195,11 +388,10 @@ $(document).ready(function(){
             str = "";
             dataWindow = "";
 
-            // Write out the data array on a blank window.
-            str += "<table><tr><th>Code 2</th></tr>";
-            for(var i = 0; i < dataTwo.length; i += 1){
+            str += "<table><tr><th>D2 150</th></tr>";
+            for(var i = 0; i < d2_150.length; i += 1){
                 str += "<tr>";
-                str += "<td>" + dataTwo[i] + "</td>";
+                str += "<td>" + d2_150[i] + "</td>";
                 str += "</tr>";
             }
             str += "</table>";
@@ -210,11 +402,10 @@ $(document).ready(function(){
             str = "";
             dataWindow = "";
 
-            // Write out the data array on a blank window.
-            str += "<table><tr><th>Ani 1</th></tr>";
-            for(var i = 0; i < dataThree.length; i += 1){
+            str += "<table><tr><th>D3 150</th></tr>";
+            for(var i = 0; i < d3_150.length; i += 1){
                 str += "<tr>";
-                str += "<td>" + dataThree[i] + "</td>";
+                str += "<td>" + d3_150[i] + "</td>";
                 str += "</tr>";
             }
             str += "</table>";
@@ -225,12 +416,122 @@ $(document).ready(function(){
             str = "";
             dataWindow = "";
 
-
-            // Write out the data array on a blank window.
-            str += "<table><tr><th>Ani 2</th></tr>";
-            for(var i = 0; i < dataFour.length; i += 1){
+            str += "<table><tr><th>D4 150</th></tr>";
+            for(var i = 0; i < d4_150.length; i += 1){
                 str += "<tr>";
-                str += "<td>" + dataFour[i] + "</td>";
+                str += "<td>" + d4_150[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D1 400</th></tr>";
+            for(var i = 0; i < d1_400.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d1_400[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D2 400</th></tr>";
+            for(var i = 0; i < d2_400.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d2_400[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D3 400</th></tr>";
+            for(var i = 0; i < d3_400.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d3_400[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D4 400</th></tr>";
+            for(var i = 0; i < d4_400.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d4_400[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+           
+            str += "<table><tr><th>D1 1000</th></tr>";
+            for(var i = 0; i < d1_1000.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d1_1000[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D2 1000</th></tr>";
+            for(var i = 0; i < d2_1000.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d2_1000[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D3 1000</th></tr>";
+            for(var i = 0; i < d3_1000.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d3_1000[i] + "</td>";
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            dataWindow = window.open("about:blank", "", "_blank");
+            dataWindow.document.write(str);
+
+            str = "";
+            dataWindow = "";
+
+            str += "<table><tr><th>D4 1000</th></tr>";
+            for(var i = 0; i < d4_1000.length; i += 1){
+                str += "<tr>";
+                str += "<td>" + d4_1000[i] + "</td>";
                 str += "</tr>";
             }
             str += "</table>";
