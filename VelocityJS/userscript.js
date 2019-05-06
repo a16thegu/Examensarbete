@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var runScript;
     var count;
-    var loops = 100;
+    var loops = 600;
     var d1_150 = [];
     var d2_150 = [];
     var d3_150 = [];
@@ -368,7 +368,7 @@ $(document).ready(function(){
             hiddenElement = document.createElement("a");
             hiddenElement.href = "data:attachment/text," + encodeURI(str);
             hiddenElement.target = "_blank";
-            hiddenElement.download = "jQuery_Safari.txt";
+            hiddenElement.download = "VelocityJS_Safari.txt";
             hiddenElement.click();
         }
         else {

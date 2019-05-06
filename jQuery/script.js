@@ -228,7 +228,6 @@ function runAnimation(click){
         document.getElementById(county).style.fill = "#c50101";
     };
 
-    console.log("Hej");
     // The comming LocalStorage rows with performance.now() are for the measurement script.
     localStorage.setItem("s1_150", performance.now());
 
@@ -267,7 +266,6 @@ function runAnimation(click){
 
     // Two sleep-functions are addred to make the measurement script more automated.
     sleep(1000).then(() => {
-        console.log("Hejhej");
         // The comming LocalStorage rows with performance.now() are for the measurement script.
         localStorage.setItem("s1_400", performance.now());
 
@@ -305,7 +303,6 @@ function runAnimation(click){
     });
 
     sleep(3000).then(() => {
-        console.log("Hejhejhej");
         // The comming LocalStorage rows with performance.now() are for the measurement script.
         localStorage.setItem("s1_1000", performance.now());
 

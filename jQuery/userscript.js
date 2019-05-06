@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var runScript;
     var count;
-    var loops = 100;
+    var loops = 600;
     var d1_150 = [];
     var d2_150 = [];
     var d3_150 = [];
