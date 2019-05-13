@@ -9,9 +9,6 @@ var text;
 var img;
 var imgText;
 var previous;
-var tStart;
-var tEnd;
-var elapsedTime;
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
@@ -228,53 +225,24 @@ function runAnimation(click){
         document.getElementById(county).style.fill = "#c50101";
     };
 
-    // The comming LocalStorage rows with performance.now() are for the measurement script.
-    localStorage.setItem("s1_150", performance.now());
-
-    /* jQuery animation starts here and begins to slide the 
-     * information window to the top and out of sight for the user. */
-    $("#content").animate({
-        top: "-900px"
-    }, 150, "linear", function(){
-        localStorage.setItem("e3_150", performance.now());
-
-        // Adds the chosen countys information to the information window.
-        for(var i = 0; i < countys.length; i++){
-            if (countys[i][0] == county){
-                headline.innerHTML = countys[i][1];
-                text.innerHTML = countys[i][2];
-                img.src = countys[i][3];
-                img.alt = countys[i][4];
-                imgText.innerHTML = countys[i][5];
-            }
-        };
-
-        localStorage.setItem("s2_150", performance.now());
-
-        // Makes the information window slide down again.
-        $("#content").animate({
-            top: "0px"
-        }, 150, "linear", function(){
-            localStorage.setItem("e4_150", performance.now());
-        });
-
-        localStorage.setItem("e2_150", performance.now());
-    });
     
-    localStorage.setItem("e1_150", performance.now());
+    /* This animation is needed to level out the measurement for the durations (150, 400, 1000),
+     * otherwise the first activated animation (duration 150) will always have a longer execution time. */
+    $("#content").animate({
+        top: "0px"
+    }, 10, "linear");
 
 
-    // Two sleep-functions are addred to make the measurement script more automated.
-    sleep(1000).then(() => {
+    sleep(100).then(() => {
         // The comming LocalStorage rows with performance.now() are for the measurement script.
-        localStorage.setItem("s1_400", performance.now());
+        localStorage.setItem("s_150", performance.now());
 
         /* jQuery animation starts here and begins to slide the 
         * information window to the top and out of sight for the user. */
         $("#content").animate({
             top: "-900px"
-        }, 400, "linear", function(){
-            localStorage.setItem("e3_400", performance.now());
+        }, 150, "linear", function(){
+            localStorage.setItem("e2_150", performance.now());
 
             // Adds the chosen countys information to the information window.
             for(var i = 0; i < countys.length; i++){
@@ -287,16 +255,41 @@ function runAnimation(click){
                 }
             };
 
-            localStorage.setItem("s2_400", performance.now());
+            // Makes the information window slide down again.
+            $("#content").animate({
+                top: "0px"
+            }, 150, "linear");
+        });
+        
+        localStorage.setItem("e1_150", performance.now());
+    });
+
+    sleep(1000).then(() => {
+        // The comming LocalStorage rows with performance.now() are for the measurement script.
+        localStorage.setItem("s_400", performance.now());
+
+        /* jQuery animation starts here and begins to slide the 
+        * information window to the top and out of sight for the user. */
+        $("#content").animate({
+            top: "-900px"
+        }, 400, "linear", function(){
+            localStorage.setItem("e2_400", performance.now());
+
+            // Adds the chosen countys information to the information window.
+            for(var i = 0; i < countys.length; i++){
+                if (countys[i][0] == county){
+                    headline.innerHTML = countys[i][1];
+                    text.innerHTML = countys[i][2];
+                    img.src = countys[i][3];
+                    img.alt = countys[i][4];
+                    imgText.innerHTML = countys[i][5];
+                }
+            };
 
             // Makes the information window slide down again.
             $("#content").animate({
                 top: "0px"
-            }, 400, "linear", function(){
-                localStorage.setItem("e4_400", performance.now());
-            });
-
-            localStorage.setItem("e2_400", performance.now());
+            }, 400, "linear");
         });
         
         localStorage.setItem("e1_400", performance.now());
@@ -304,14 +297,14 @@ function runAnimation(click){
 
     sleep(3000).then(() => {
         // The comming LocalStorage rows with performance.now() are for the measurement script.
-        localStorage.setItem("s1_1000", performance.now());
+        localStorage.setItem("s_1000", performance.now());
 
         /* jQuery animation starts here and begins to slide the 
         * information window to the top and out of sight for the user. */
         $("#content").animate({
             top: "-900px"
         }, 1000, "linear", function(){
-            localStorage.setItem("e3_1000", performance.now());
+            localStorage.setItem("e2_1000", performance.now());
 
             // Adds the chosen countys information to the information window.
             for(var i = 0; i < countys.length; i++){
@@ -324,16 +317,10 @@ function runAnimation(click){
                 }
             };
 
-            localStorage.setItem("s2_1000", performance.now());
-
             // Makes the information window slide down again.
             $("#content").animate({
                 top: "0px"
-            }, 1000, "linear", function(){
-                localStorage.setItem("e4_1000", performance.now());
-            });
-
-            localStorage.setItem("e2_1000", performance.now());
+            }, 1000, "linear");
         });
         
         localStorage.setItem("e1_1000", performance.now());
