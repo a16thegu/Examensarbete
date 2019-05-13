@@ -15,8 +15,6 @@ $(document).ready(function(){
     var d3_1000 = [];
     var d4_1000 = [];
     var str = "";
-    var dataWindow;
-    var hiddenElement;
     var event;
     const sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -250,12 +248,72 @@ $(document).ready(function(){
         console.log("D3 1000: " + JSON.stringify(d3_1000));
         console.log("D4 1000: " + JSON.stringify(d4_1000));
 
-        
+        // Adds the data to a sting and download it as a file.      
+        str += "<table><tr><h1>Code1</h1></tr><tr>";
+        str += "<th>D1 150</th>";
+        str += "<th>D1 400</th>";
+        str += "<th>D1 1000</th>";
+        str += "</tr>";
 
-        /* Due to different issues in all browser there 
-         * needs to be two ways to save the d1_150 from the 
-         * measuremnts. This is a check point to determend 
-         * which browser that is used. */
+        for(var i = 0; i < d1_150.length; i += 1){
+            str += "<tr>";
+            str += "<td>" + d1_150[i] + "</td>";
+            str += "<td>" + d1_400[i] + "</td>";
+            str += "<td>" + d1_1000[i] + "</td>";
+            str += "</tr>";
+        }
+        str += "</table>";
+
+
+        str += "<table><tr><h1>Code2</h1></tr><tr>";
+        str += "<th>D2 150</th>";
+        str += "<th>D2 400</th>";
+        str += "<th>D2 1000</th>";
+        str += "</tr>";
+
+        for(var i = 0; i < d2_150.length; i += 1){
+            str += "<tr>";
+            str += "<td>" + d2_150[i] + "</td>";
+            str += "<td>" + d2_400[i] + "</td>";
+            str += "<td>" + d2_1000[i] + "</td>";
+            str += "</tr>";
+        }
+        str += "</table>";
+
+
+        str += "<table><tr><h1>Ani1</h1></tr><tr>";
+        str += "<th>D3 150</th>";
+        str += "<th>D3 400</th>";
+        str += "<th>D3 1000</th>";
+        str += "</tr>";
+
+        for(var i = 0; i < d3_150.length; i += 1){
+            str += "<tr>";
+            str += "<td>" + d3_150[i] + "</td>";
+            str += "<td>" + d3_400[i] + "</td>";
+            str += "<td>" + d3_1000[i] + "</td>";
+            str += "</tr>";
+        }
+        str += "</table>";
+
+
+        str += "<table><tr><h1>Ani2</h1></tr><tr>";
+        str += "<th>D4 150</th>";
+        str += "<th>D4 400</th>";
+        str += "<th>D4 1000</th>";
+        str += "</tr>";
+
+        for(var i = 0; i < d4_150.length; i += 1){
+            str += "<tr>";
+            str += "<td>" + d4_150[i] + "</td>";
+            str += "<td>" + d4_400[i] + "</td>";
+            str += "<td>" + d4_1000[i] + "</td>";
+            str += "</tr>";
+        }
+        str += "</table>";
+
+
+        // Check which browser has been used.
         var ua = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i),
             browser;
 
@@ -264,281 +322,32 @@ $(document).ready(function(){
         }
         else {
             browser = ua[1].toLowerCase();
+        }    
+
+        // Names the data file to the browser that has been used.
+        if (browser == "firefox"){
+            download("VelocityJS_Firefox.html", str);
+        }
+        else if (browser == "chrome"){
+            download("VelocityJS_Chrome.html", str);
+        }
+        else if (browser == "safari"){
+            download("VelocityJS_Safari.html", str);
         }
 
-        // Saves the data according to the browser that is used. 
-        if (browser == "safari"){
-
-            // Adds the data to a sting and download it as a file.
-            str += "D1 150";
-
-            for(var i = 0; i < d1_150.length; i += 1){
-                str += "\n";
-                str += d1_150[i];
-            }
-
-            str += "\n\n\n";
-            str += "D2 150";
-
-            for(var i = 0; i < d2_150.length; i += 1){
-                str += "\n";
-                str += d2_150[i];
-            }
-
-            str += "\n\n\n";
-            str += "D3 150";
-
-            for(var i = 0; i < d3_150.length; i += 1){
-                str += "\n";
-                str += d3_150[i];
-            }
-
-            str += "\n\n\n";
-            str += "D4 150";
-
-            for(var i = 0; i < d4_150.length; i += 1){
-                str += "\n";
-                str += d4_150[i];
-            }
-
-            str += "\n\n\n";
-            str += "D1 400";
-
-            for(var i = 0; i < d1_400.length; i += 1){
-                str += "\n";
-                str += d1_400[i];
-            }
-
-            str += "\n\n\n";
-            str += "D2 400";
-
-            for(var i = 0; i < d2_400.length; i += 1){
-                str += "\n";
-                str += d2_400[i];
-            }
-
-            str += "\n\n\n";
-            str += "D3 400";
-
-            for(var i = 0; i < d3_400.length; i += 1){
-                str += "\n";
-                str += d3_400[i];
-            }
-
-            str += "\n\n\n";
-            str += "D4 400";
-
-            for(var i = 0; i < d4_400.length; i += 1){
-                str += "\n";
-                str += d4_400[i];
-            }
-
-            str += "\n\n\n";
-            str += "D1 1000";
-
-            for(var i = 0; i < d1_1000.length; i += 1){
-                str += "\n";
-                str += d1_1000[i];
-            }
-
-            str += "\n\n\n";
-            str += "D2 1000";
-
-            for(var i = 0; i < d2_1000.length; i += 1){
-                str += "\n";
-                str += d2_1000[i];
-            }
-
-            str += "\n\n\n";
-            str += "D3 1000";
-
-            for(var i = 0; i < d3_1000.length; i += 1){
-                str += "\n";
-                str += d3_1000[i];
-            }
-
-            str += "\n\n\n";
-            str += "D4 1000";
-
-            for(var i = 0; i < d4_1000.length; i += 1){
-                str += "\n";
-                str += d4_1000[i];
-            }
-
-            hiddenElement = document.createElement("a");
-            hiddenElement.href = "data:attachment/text," + encodeURI(str);
-            hiddenElement.target = "_blank";
-            hiddenElement.download = "VelocityJS_Safari.txt";
-            hiddenElement.click();
-        }
-        else {
-
-            // Write out all data array on a blank seperat windows.
-            str += "<table><tr><th>D1 150</th></tr>";
-            for(var i = 0; i < d1_150.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d1_150[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D2 150</th></tr>";
-            for(var i = 0; i < d2_150.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d2_150[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D3 150</th></tr>";
-            for(var i = 0; i < d3_150.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d3_150[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D4 150</th></tr>";
-            for(var i = 0; i < d4_150.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d4_150[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D1 400</th></tr>";
-            for(var i = 0; i < d1_400.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d1_400[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D2 400</th></tr>";
-            for(var i = 0; i < d2_400.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d2_400[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D3 400</th></tr>";
-            for(var i = 0; i < d3_400.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d3_400[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D4 400</th></tr>";
-            for(var i = 0; i < d4_400.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d4_400[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-           
-            str += "<table><tr><th>D1 1000</th></tr>";
-            for(var i = 0; i < d1_1000.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d1_1000[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D2 1000</th></tr>";
-            for(var i = 0; i < d2_1000.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d2_1000[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D3 1000</th></tr>";
-            for(var i = 0; i < d3_1000.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d3_1000[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-
-            str = "";
-            dataWindow = "";
-
-            str += "<table><tr><th>D4 1000</th></tr>";
-            for(var i = 0; i < d4_1000.length; i += 1){
-                str += "<tr>";
-                str += "<td>" + d4_1000[i] + "</td>";
-                str += "</tr>";
-            }
-            str += "</table>";
-
-            dataWindow = window.open("about:blank", "", "_blank");
-            dataWindow.document.write(str);
-        } 
     }
 });
   
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
